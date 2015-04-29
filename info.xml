@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<extension key="com.aghstrategies.tinymce" type="module">
+  <file>tinymce</file>
+  <name>TinyMCE Plugin</name>
+  <description>Impements TinyMCE as the WYSIWYG for CiviCRM</description>
+  <license>AGPL-3.0</license>
+  <maintainer>
+    <author>Tyrell Cook</author>
+    <email>tyrell@aghstrategies.com</email>
+  </maintainer>
+  <releaseDate>2015-04-29</releaseDate>
+  <version>1.0</version>
+  <develStage>stable</develStage>
+  <compatibility>
+    <ver>4.7</ver>
+  </compatibility>
+  <comments>This implements TinyMCE version 4</comments>
+  <civix>
+    <namespace>CRM/Tinymce</namespace>
+  </civix>
+</extension>
