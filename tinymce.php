@@ -2,20 +2,38 @@
 
 require_once 'tinymce.civix.php';
 
-function tinymce_civicrm_buildForm($formName, $form) {
-  $editorID = CRM_Core_BAO_Setting::getItem(CRM_Core_BAO_Setting::SYSTEM_PREFERENCES_NAME,
-    'editor_id'
-  );
-  $editor = CRM_Utils_Array::value($editorID,
-    CRM_Core_OptionGroup::values('wysiwyg_editor')
-  );
-  if ($editor == "TinyMCE") {
-    CRM_Core_Resources::singleton()->addScriptFile('com.civicrm.tinymce', 'js/tinymce/tinymce.min.js', 10, 'html-header');
-    CRM_Core_Resources::singleton()->addScriptFile('com.civicrm.tinymce', 'js/tinymce/jquery.tinymce.min.js', 9, 'html-header');
-    CRM_Core_Resources::singleton()->addScriptFile('com.civicrm.tinymce', 'js/crm.tinymce.js', 10, 'html-header');
+/**
+ * Add TinyMCE javascript.
+ */
+function _tinymce_civicrm_addResources() {
+  static $added = FALSE;
+  if (!$added) {
+    $added = TRUE;
+    $editorID = CRM_Core_BAO_Setting::getItem(CRM_Core_BAO_Setting::SYSTEM_PREFERENCES_NAME, 'editor_id');
+    $editor = CRM_Utils_Array::value($editorID,
+      CRM_Core_OptionGroup::values('wysiwyg_editor')
+    );
+    if ($editor == "TinyMCE") {
+      CRM_Core_Resources::singleton()->addScriptFile('com.civicrm.tinymce', 'js/tinymce/jquery.tinymce.min.js', 8, 'html-header');
+      CRM_Core_Resources::singleton()->addScriptFile('com.civicrm.tinymce', 'js/tinymce/tinymce.min.js', 9, 'html-header');
+      CRM_Core_Resources::singleton()->addScriptFile('com.civicrm.tinymce', 'js/crm.tinymce.js', 10, 'html-header');
+    }
   }
 }
 
+/**
+ * Add TinyMCE javascript to pages.
+ */
+function tinymce_civicrm_pageRun($page) {
+  _tinymce_civicrm_addResources();
+}
+
+/**
+ * Add TinyMCE javascript to forms.
+ */
+function tinymce_civicrm_buildForm($formName, $form) {
+  _tinymce_civicrm_addResources();
+}
 
 /**
  * Implementation of hook_civicrm_config
