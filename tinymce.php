@@ -11,7 +11,7 @@ function _tinymce_civicrm_addResources() {
     $added = TRUE;
     $editorID = CRM_Core_BAO_Setting::getItem(CRM_Core_BAO_Setting::SYSTEM_PREFERENCES_NAME, 'editor_id');
     $editor = CRM_Utils_Array::value($editorID,
-      CRM_Core_OptionGroup::values('wysiwyg_editor')
+      CRM_Core_OptionGroup::values('wysiwyg_editor', FALSE, FALSE, FALSE, NULL, 'name')
     );
     if ($editor == "TinyMCE") {
       CRM_Core_Resources::singleton()->addScriptFile('com.civicrm.tinymce', 'js/tinymce/jquery.tinymce.min.js', 8, 'html-header');
