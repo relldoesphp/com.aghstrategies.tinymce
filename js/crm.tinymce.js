@@ -25,9 +25,7 @@
   }
 
   function openFiles(field_name, url, type, win) {
-    console.log(field_name);
     var browseUrl = CRM.config.userFrameworkResourceURL + "packages/kcfinder2/browse.php?opener=tinymce4&cms=civicrm&type="+type+"&dir="+url+"&field"+field_name+"&theme=default";
-    //var browseUrl = "http://dmaster.localhost/sites/default/ext/com.civicrm.tinymce/js/kcfinder/browse.php?opener=tinymce4&cms=civicrm";
     tinyMCE.activeEditor.windowManager.open({
         file: browseUrl,
         title: "KCFinder Web File Manager",
@@ -40,7 +38,7 @@
     },
     {
       window: win,
-      input: field_name,
+      input: field_name
     });
     return false;
   }
@@ -75,7 +73,7 @@
         },
         {
           window: win,
-          input: field_name,
+          input: field_name
         });
         return false;
       },
@@ -88,7 +86,7 @@
     });
     editor.render();
     editor.on('blur', function() {
-      editor.updateElement();
+      editor.save();
       $(item).trigger("blur");
       $(item).trigger("change");
     });
@@ -98,9 +96,7 @@
     editor.on('LoadContent', function() {
       $(item).trigger("paste");
     });
-    // tinyMCE.execCommand("mceRemoveControl", false, editor.editorId);
-    // tinyMCE.execCommand("mceAddControl"   , true,  editor.editorId);
-  }
+  };
 
   CRM.wysiwyg.destroy = function(item) {
     var editor = getInstance(item);

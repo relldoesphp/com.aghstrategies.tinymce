@@ -14,9 +14,9 @@ function _tinymce_civicrm_addResources() {
       CRM_Core_OptionGroup::values('wysiwyg_editor', FALSE, FALSE, FALSE, NULL, 'name')
     );
     if ($editor == "TinyMCE") {
-      CRM_Core_Resources::singleton()->addScriptFile('com.civicrm.tinymce', 'js/tinymce/jquery.tinymce.min.js', 8, 'html-header');
-      CRM_Core_Resources::singleton()->addScriptFile('com.civicrm.tinymce', 'js/tinymce/tinymce.min.js', 9, 'html-header');
-      CRM_Core_Resources::singleton()->addScriptFile('com.civicrm.tinymce', 'js/crm.tinymce.js', 10, 'html-header');
+      CRM_Core_Resources::singleton()->addScriptFile('com.aghstrategies.tinymce', 'js/tinymce/jquery.tinymce.min.js', 8, 'html-header');
+      CRM_Core_Resources::singleton()->addScriptFile('com.aghstrategies.tinymce', 'js/tinymce/tinymce.min.js', 9, 'html-header');
+      CRM_Core_Resources::singleton()->addScriptFile('com.aghstrategies.tinymce', 'js/crm.tinymce.js', 10, 'html-header');
     }
   }
 }
@@ -116,7 +116,7 @@ function tinymce_civicrm_upgrade($op, CRM_Queue_Queue $queue = NULL) {
  */
 function tinymce_civicrm_managed(&$entities) {
   $entities[] = array(
-    'module' => 'com.civicrm.tinymce',
+    'module' => 'com.aghstrategies.tinymce',
     'entity' => 'OptionValue',
     'name'  => 'TinyMCE',
     'params' => array(
