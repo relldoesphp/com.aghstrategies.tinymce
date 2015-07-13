@@ -88,7 +88,7 @@
     });
     editor.render();
     editor.on('blur', function() {
-      editor.updateElement();
+      editor.save();
       $(item).trigger("blur");
       $(item).trigger("change");
     });
