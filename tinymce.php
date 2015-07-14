@@ -9,11 +9,7 @@ function _tinymce_civicrm_addResources() {
   static $added = FALSE;
   if (!$added) {
     $added = TRUE;
-    $editorID = CRM_Core_BAO_Setting::getItem(CRM_Core_BAO_Setting::SYSTEM_PREFERENCES_NAME, 'editor_id');
-    $editor = CRM_Utils_Array::value($editorID,
-      CRM_Core_OptionGroup::values('wysiwyg_editor', FALSE, FALSE, FALSE, NULL, 'name')
-    );
-    if ($editor == "TinyMCE") {
+    if (CRM_Core_BAO_Setting::getItem(CRM_Core_BAO_Setting::SYSTEM_PREFERENCES_NAME, 'editor_id') == "TinyMCE") {
       CRM_Core_Resources::singleton()->addScriptFile('com.aghstrategies.tinymce', 'js/tinymce/jquery.tinymce.min.js', 8, 'html-header');
       CRM_Core_Resources::singleton()->addScriptFile('com.aghstrategies.tinymce', 'js/tinymce/tinymce.min.js', 9, 'html-header');
       CRM_Core_Resources::singleton()->addScriptFile('com.aghstrategies.tinymce', 'js/crm.tinymce.js', 10, 'html-header');
@@ -61,6 +57,7 @@ function tinymce_civicrm_xmlMenu(&$files) {
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_install
  */
 function tinymce_civicrm_install() {
+  CRM_Core_BAO_Setting::setItem('TinyMCE', CRM_Core_BAO_Setting::SYSTEM_PREFERENCES_NAME, 'editor_id');
   return _tinymce_civix_civicrm_install();
 }
 
@@ -70,6 +67,7 @@ function tinymce_civicrm_install() {
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_uninstall
  */
 function tinymce_civicrm_uninstall() {
+  CRM_Core_BAO_Setting::setItem('CKEditor', CRM_Core_BAO_Setting::SYSTEM_PREFERENCES_NAME, 'editor_id');
   return _tinymce_civix_civicrm_uninstall();
 }
 
@@ -79,6 +77,7 @@ function tinymce_civicrm_uninstall() {
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_enable
  */
 function tinymce_civicrm_enable() {
+  CRM_Core_BAO_Setting::setItem('TinyMCE', CRM_Core_BAO_Setting::SYSTEM_PREFERENCES_NAME, 'editor_id');
   return _tinymce_civix_civicrm_enable();
 }
 
@@ -88,6 +87,7 @@ function tinymce_civicrm_enable() {
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_disable
  */
 function tinymce_civicrm_disable() {
+  CRM_Core_BAO_Setting::setItem('CKEditor', CRM_Core_BAO_Setting::SYSTEM_PREFERENCES_NAME, 'editor_id');
   return _tinymce_civix_civicrm_disable();
 }
 
