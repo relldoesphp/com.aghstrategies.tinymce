@@ -27,7 +27,7 @@
   CRM.wysiwyg.create = function(item) {
     var id = $(item).attr("id");
     var editor = tinymce.createEditor(id, {
-      theme : "modern",
+      menubar: false,
       plugins: [
         "advlist autolink lists link image charmap print preview hr anchor pagebreak",
         "searchreplace wordcount visualblocks visualchars code fullscreen",
