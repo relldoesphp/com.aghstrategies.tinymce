@@ -1,23 +1,3 @@
-/*_.init(function(){
-  tinyMCE.init(
-    {selector:"textarea",
-     plugins:"link image media",
-     toolbar:"link | image | media",
-     file_browser_callback:function(d,a,b,c){
-      tinyMCE.activeEditor.windowManager.open({
-        file:"/demo/kcfinder/browse.php?opener=tinymce4&field="+d+"&type="+b+"&dir="+b+"/public",
-        title:"KCFinder web file manager",
-        width:700,
-        height:500,
-        inline:true,
-        close_previous:false
-      },
-      {window:c,input:d});return false}})});
-
-      function openKCFinder(c,a,b,d){
-     tinyMCE.activeEditor.windowManager.open({
-      file:"/demo/kcfinder/browse.php?opener=tinymce&type="+b+"&dir="+b+"/public",title:"KCFinder",width:700,height:500,resizable:true,inline:true,close_previous:false,popup_css:false},{window:d,input:c});return false}
-*/
 (function($, _) {
   function getInstance(item) {
     var id = $(item).attr("id");
@@ -25,21 +5,21 @@
   }
 
   function openFiles(field_name, url, type, win) {
-    var browseUrl = CRM.config.userFrameworkResourceURL + "packages/kcfinder2/browse.php?opener=tinymce4&cms=civicrm&type="+type+"&dir="+url+"&field"+field_name+"&theme=default";
+    var browseUrl = CRM.config.userFrameworkResourceURL + "packages/kcfinder/browse.php?opener=tinymce4&cms=civicrm&type="+type+"&field="+field_name+"&theme=default";
     tinyMCE.activeEditor.windowManager.open({
         file: browseUrl,
-        title: "KCFinder Web File Manager",
+        title: ts("CiviCRM File Manager"),
         width: 700,
         height: 500,
         resizable: "yes",
         inline: true,
         close_previous: "no",
         popup_css: false
-    },
-    {
-      window: win,
-      input: field_name
-    });
+      },
+      {
+        window: win,
+        input: field_name
+      });
     return false;
   }
 
@@ -59,29 +39,11 @@
       image_advtab: true,
       convert_urls : false,
       remove_script_host : false,
-      file_browser_callback:   function(field_name, url, type, win) {
-        var browseUrl = CRM.config.userFrameworkResourceURL + "packages/kcfinder/browse.php?opener=tinymce4&cms=civicrm&type="+type+"&field="+field_name+"&theme=default";
-        tinyMCE.activeEditor.windowManager.open({
-            file: browseUrl,
-            title: "CiviCRM File Manager",
-            width: 700,
-            height: 500,
-            resizable: "yes",
-            inline: true,
-            close_previous: "no",
-            popup_css: false
-        },
-        {
-          window: win,
-          input: field_name
-        });
-        return false;
-      },
+      file_browser_callback: openFiles,
       apply_source_formatting : true,
-      setup : function(ed) {
-            var height = cj("#" + ed.editorId).attr("height");
-            $("#" + ed.editorId + "_tbl").css("height", height);
-            $("#" + ed.editorId + "_ifr").css("height", height);
+      setup: function(ed) {
+        var height = $("#" + ed.editorId).attr("height");
+        $("#" + ed.editorId + "_tbl, #" + ed.editorId + "_ifr").css("height", height);
       }
     });
     editor.render();
