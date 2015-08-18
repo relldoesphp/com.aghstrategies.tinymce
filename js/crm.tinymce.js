@@ -1,4 +1,26 @@
 (function($, _) {
+  // Export default settings so they can be overridden
+  CRM.config.tinymce = {
+    menubar: false,
+    plugins: [
+      "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+      "searchreplace wordcount visualblocks visualchars code fullscreen",
+      "insertdatetime media nonbreaking save table contextmenu directionality",
+      "emoticons template paste textcolor colorpicker textpattern"
+    ],
+    toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | spellchecker separator removeformat separator ",
+    toolbar2: "print preview media | forecolor backcolor emoticons | justifyfull separator pastetext pasteword | code | fullscreen help",
+    image_advtab: true,
+    convert_urls: false,
+    remove_script_host: false,
+    file_browser_callback: openFiles,
+    apply_source_formatting: true,
+    setup: function(ed) {
+      var height = $("#" + ed.editorId).attr("height");
+      $("#" + ed.editorId + "_tbl, #" + ed.editorId + "_ifr").css("height", height);
+    }
+  };
+
   function getInstance(item) {
     var id = $(item).attr("id");
     return tinyMCE.get(id);
@@ -26,26 +48,7 @@
   CRM.wysiwyg.supportsFileUploads = true;
   CRM.wysiwyg.create = function(item) {
     var id = $(item).attr("id");
-    var editor = tinymce.createEditor(id, {
-      menubar: false,
-      plugins: [
-        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-        "searchreplace wordcount visualblocks visualchars code fullscreen",
-        "insertdatetime media nonbreaking save table contextmenu directionality",
-        "emoticons template paste textcolor colorpicker textpattern"
-      ],
-      toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | spellchecker separator removeformat separator ",
-      toolbar2: "print preview media | forecolor backcolor emoticons | justifyfull separator pastetext pasteword | code | fullscreen help",
-      image_advtab: true,
-      convert_urls : false,
-      remove_script_host : false,
-      file_browser_callback: openFiles,
-      apply_source_formatting : true,
-      setup: function(ed) {
-        var height = $("#" + ed.editorId).attr("height");
-        $("#" + ed.editorId + "_tbl, #" + ed.editorId + "_ifr").css("height", height);
-      }
-    });
+    var editor = tinymce.createEditor(id, CRM.config.tinymce);
     editor.render();
     editor.on('blur', function() {
       editor.save();
