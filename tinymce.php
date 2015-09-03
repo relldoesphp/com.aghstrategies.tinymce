@@ -10,13 +10,11 @@ require_once 'tinymce.civix.php';
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_coreResourceList
  */
 function tinymce_civicrm_coreResourceList($list, $region) {
-  static $added = FALSE;
-  if (!$added && $region == 'html-header') {
-    $added = TRUE;
+  if ($region == 'html-header') {
     if (CRM_Core_BAO_Setting::getItem(CRM_Core_BAO_Setting::SYSTEM_PREFERENCES_NAME, 'editor_id') == "TinyMCE") {
-      CRM_Core_Resources::singleton()->addScriptFile('com.aghstrategies.tinymce', 'js/tinymce/tinymce.min.js', 8, 'html-header');
-      CRM_Core_Resources::singleton()->addScriptFile('com.aghstrategies.tinymce', 'js/tinymce/jquery.tinymce.min.js', 9, 'html-header');
-      CRM_Core_Resources::singleton()->addScriptFile('com.aghstrategies.tinymce', 'js/crm.tinymce.js', 10, 'html-header');
+      CRM_Core_Resources::singleton()->addScriptFile('com.aghstrategies.tinymce', 'js/tinymce/tinymce.min.js', -99, 'html-header');
+      CRM_Core_Resources::singleton()->addScriptFile('com.aghstrategies.tinymce', 'js/tinymce/jquery.tinymce.min.js', -98, 'html-header');
+      CRM_Core_Resources::singleton()->addScriptFile('com.aghstrategies.tinymce', 'js/crm.tinymce.js', -97, 'html-header');
     }
   }
 }
