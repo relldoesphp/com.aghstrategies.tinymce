@@ -16,7 +16,7 @@
   <compatibility>
     <ver>4.7</ver>
   </compatibility>
-  <comments>TinyMCE version 4.2.4</comments>
+  <comments>TinyMCE version 4.2.6</comments>
   <civix>
     <namespace>CRM/Tinymce</namespace>
   </civix>
