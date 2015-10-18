@@ -75,6 +75,11 @@
       editor.on('LoadContent', function() {
         $(item).trigger("paste");
       });
+
+      // Hide CiviCRM menubar when editor is fullscreen
+      editor.on('FullscreenStateChanged', function(e) {
+        $('#civicrm-menu').toggle(!e.state);
+      });
     };
 
     if (!$(item).length) {
