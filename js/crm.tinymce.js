@@ -1,6 +1,7 @@
 (function($, _) {
-  // Export default settings so they can be overridden
-  CRM.config.tinymce = {
+  var autoId = 0,
+  // Default settings (can be overridden in CRM.config.tinymce)
+  defaults = {
     menubar: false,
     plugins: [
       "advlist autolink lists link image charmap print preview hr anchor pagebreak",
@@ -14,12 +15,10 @@
     convert_urls: false,
     remove_script_host: false,
     file_browser_callback: openFiles,
-    apply_source_formatting: true,
-    setup: function(ed) {
-      var height = $("#" + ed.editorId).attr("height");
-      $("#" + ed.editorId + "_tbl, #" + ed.editorId + "_ifr").css("height", height);
-    }
+    apply_source_formatting: true
   };
+
+  CRM.wysiwyg.supportsFileUploads = true;
 
   function getInstance(item) {
     var id = $(item).attr("id");
@@ -45,39 +44,49 @@
     return false;
   }
 
-  CRM.wysiwyg.supportsFileUploads = true;
   CRM.wysiwyg.create = function(item) {
-    var id = $(item).attr("id"),
-      blurEvent,
-      changeEvent,
+    var id = $(item).attr('id'),
       deferred = $.Deferred(),
-      editor = tinymce.createEditor(id, CRM.config.tinymce);
+      settings = $.extend({}, defaults, CRM.config.tinymce || {});
 
-    editor.on('init', function() {
-      deferred.resolve();
-    });
+    settings.setup = function(editor) {
+      var blurEvent, changeEvent;
 
-    editor.render();
+      editor.on('init', function() {
+        deferred.resolve();
+      });
 
-    editor.on('blur', function() {
-      if (blurEvent) clearTimeout(blurEvent);
-      blurEvent = setTimeout(function() {
-        editor.save();
-        $(item).trigger("blur");
-      }, 100);
-    });
+      editor.on('blur', function() {
+        if (blurEvent) clearTimeout(blurEvent);
+        blurEvent = setTimeout(function() {
+          editor.save();
+          $(item).trigger("blur");
+        }, 100);
+      });
 
-    editor.on('change', function() {
-      if (changeEvent) clearTimeout(changeEvent);
-      changeEvent = setTimeout(function() {
-        editor.save();
-        $(item).trigger("change");
-      }, 100);
-    });
+      editor.on('change', function() {
+        if (changeEvent) clearTimeout(changeEvent);
+        changeEvent = setTimeout(function() {
+          editor.save();
+          $(item).trigger("change");
+        }, 100);
+      });
 
-    editor.on('LoadContent', function() {
-      $(item).trigger("paste");
-    });
+      editor.on('LoadContent', function() {
+        $(item).trigger("paste");
+      });
+    };
+
+    if (!$(item).length) {
+      return deferred.reject();
+    }
+
+    if (!id) {
+      id = 'crm-tinymce-instance-' + (autoId++);
+      $(item).first().attr('id', id);
+    }
+
+    tinymce.createEditor(id, settings).render();
 
     return deferred;
   };
