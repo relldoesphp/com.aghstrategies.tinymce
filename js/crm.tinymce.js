@@ -50,7 +50,13 @@
     var id = $(item).attr("id"),
       blurEvent,
       changeEvent,
+      deferred = $.Deferred(),
       editor = tinymce.createEditor(id, CRM.config.tinymce);
+
+    editor.on('init', function() {
+      deferred.resolve();
+    });
+
     editor.render();
 
     editor.on('blur', function() {
@@ -72,6 +78,8 @@
     editor.on('LoadContent', function() {
       $(item).trigger("paste");
     });
+
+    return deferred;
   };
 
   CRM.wysiwyg.destroy = function(item) {
