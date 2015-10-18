@@ -23,7 +23,7 @@
 
   function getInstance(item) {
     var id = $(item).attr("id");
-    return tinyMCE.get(id);
+    return id ? tinyMCE.get(id) : null;
   }
 
   function openFiles(field_name, url, type, win) {
@@ -47,17 +47,28 @@
 
   CRM.wysiwyg.supportsFileUploads = true;
   CRM.wysiwyg.create = function(item) {
-    var id = $(item).attr("id");
-    var editor = tinymce.createEditor(id, CRM.config.tinymce);
+    var id = $(item).attr("id"),
+      blurEvent,
+      changeEvent,
+      editor = tinymce.createEditor(id, CRM.config.tinymce);
     editor.render();
+
     editor.on('blur', function() {
-      editor.save();
-      $(item).trigger("blur");
-      $(item).trigger("change");
+      if (blurEvent) clearTimeout(blurEvent);
+      blurEvent = setTimeout(function() {
+        editor.save();
+        $(item).trigger("blur");
+      }, 100);
     });
+
     editor.on('change', function() {
-      $(item).trigger("change");
+      if (changeEvent) clearTimeout(changeEvent);
+      changeEvent = setTimeout(function() {
+        editor.save();
+        $(item).trigger("change");
+      }, 100);
     });
+
     editor.on('LoadContent', function() {
       $(item).trigger("paste");
     });
