@@ -19,26 +19,6 @@ function tinymce_civicrm_coreResourceList($list, $region) {
 }
 
 /**
- * Implementation of hook_civicrm_config
- *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_config
- */
-function tinymce_civicrm_config(&$config) {
-  _tinymce_civix_civicrm_config($config);
-}
-
-/**
- * Implementation of hook_civicrm_xmlMenu
- *
- * @param $files array(string)
- *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_xmlMenu
- */
-function tinymce_civicrm_xmlMenu(&$files) {
-  _tinymce_civix_civicrm_xmlMenu($files);
-}
-
-/**
  * Implementation of hook_civicrm_install
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_install
@@ -114,26 +94,4 @@ function tinymce_civicrm_managed(&$entities) {
     ),
   );
   return _tinymce_civix_civicrm_managed($entities);
-}
-
-/**
- * Implementation of hook_civicrm_caseTypes
- *
- * Generate a list of case-types
- *
- * Note: This hook only runs in CiviCRM 4.4+.
- *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_caseTypes
- */
-function tinymce_civicrm_caseTypes(&$caseTypes) {
-  _tinymce_civix_civicrm_caseTypes($caseTypes);
-}
-
-/**
- * Implementation of hook_civicrm_alterSettingsFolders
- *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_alterSettingsFolders
- */
-function tinymce_civicrm_alterSettingsFolders(&$metaDataFolders = NULL) {
-  _tinymce_civix_civicrm_alterSettingsFolders($metaDataFolders);
 }
