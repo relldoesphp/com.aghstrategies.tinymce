@@ -86,10 +86,16 @@
       return deferred.reject();
     }
 
+    if ($(item).hasClass('crm-wysiwyg-enabled')) {
+      return deferred.resolve();
+    }
+
     if (!id) {
       id = 'crm-tinymce-instance-' + (autoId++);
       $(item).first().attr('id', id);
     }
+
+    $(item).addClass('crm-wysiwyg-enabled');
 
     tinymce.createEditor(id, settings).render();
 
@@ -97,6 +103,7 @@
   };
 
   CRM.wysiwyg.destroy = function(item) {
+    $(item).removeClass('crm-wysiwyg-enabled');
     var editor = getInstance(item);
     if (editor) {
       editor.destroy();
