@@ -24,7 +24,7 @@ function tinymce_civicrm_coreResourceList($list, $region) {
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_install
  */
 function tinymce_civicrm_install() {
-  CRM_Core_BAO_Setting::setItem('TinyMCE', CRM_Core_BAO_Setting::SYSTEM_PREFERENCES_NAME, 'editor_id');
+  Civi::settings()->set('editor_id', 'TinyMCE');
   return _tinymce_civix_civicrm_install();
 }
 
@@ -34,7 +34,7 @@ function tinymce_civicrm_install() {
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_uninstall
  */
 function tinymce_civicrm_uninstall() {
-  CRM_Core_BAO_Setting::setItem('CKEditor', CRM_Core_BAO_Setting::SYSTEM_PREFERENCES_NAME, 'editor_id');
+  Civi::settings()->set('editor_id', 'CKEditor');
   return _tinymce_civix_civicrm_uninstall();
 }
 
@@ -44,7 +44,7 @@ function tinymce_civicrm_uninstall() {
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_enable
  */
 function tinymce_civicrm_enable() {
-  CRM_Core_BAO_Setting::setItem('TinyMCE', CRM_Core_BAO_Setting::SYSTEM_PREFERENCES_NAME, 'editor_id');
+  Civi::settings()->set('editor_id', 'TinyMCE');
   return _tinymce_civix_civicrm_enable();
 }
 
@@ -54,7 +54,7 @@ function tinymce_civicrm_enable() {
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_disable
  */
 function tinymce_civicrm_disable() {
-  CRM_Core_BAO_Setting::setItem('CKEditor', CRM_Core_BAO_Setting::SYSTEM_PREFERENCES_NAME, 'editor_id');
+  Civi::settings()->set('editor_id', 'CKEditor');
   return _tinymce_civix_civicrm_disable();
 }
 
