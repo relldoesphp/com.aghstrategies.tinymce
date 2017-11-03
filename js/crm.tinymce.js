@@ -78,7 +78,7 @@
 
       // Hide CiviCRM menubar when editor is fullscreen
       editor.on('FullscreenStateChanged', function(e) {
-        $('#civicrm-menu').toggle(!e.state);
+        $('#civicrm-menu, #wpadminbar').toggle(!e.state);
       });
     };
 
