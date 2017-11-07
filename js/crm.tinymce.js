@@ -54,6 +54,7 @@
 
       editor.on('init', function() {
         deferred.resolve();
+        $(item).trigger('crmWysiwygCreate', ['tinymce', editor]);
       });
 
       editor.on('blur', function() {
@@ -78,7 +79,7 @@
 
       // Hide CiviCRM menubar when editor is fullscreen
       editor.on('FullscreenStateChanged', function(e) {
-        $('#civicrm-menu, #wpadminbar').toggle(!e.state);
+        $('#civicrm-menu, #wpadminbar, #toolbar').toggle(!e.state);
       });
     };
 
