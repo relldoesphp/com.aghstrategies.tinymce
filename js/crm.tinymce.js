@@ -26,7 +26,7 @@
   }
 
   function openFiles(field_name, url, type, win) {
-    var browseUrl = CRM.config.resourceBase + "packages/kcfinder/browse.php?opener=tinymce4&cms=civicrm&type="+type+"&field="+field_name+"&theme=default";
+    var browseUrl = CRM.config.packagesBase + "kcfinder/browse.php?opener=tinymce4&cms=civicrm&type="+type+"&field="+field_name+"&theme=default";
     tinyMCE.activeEditor.windowManager.open({
         file: browseUrl,
         title: ts("CiviCRM File Manager"),
