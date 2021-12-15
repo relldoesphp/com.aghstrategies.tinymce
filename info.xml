@@ -10,11 +10,11 @@
   </maintainer>
   <url desc="Documentation">http://www.tinymce.com</url>
   <url desc="Main Extension Page">https://civicrm.org/extensions/tinymce</url>
-  <releaseDate>2017-10-06</releaseDate>
-  <version>1.4</version>
+  <releaseDate>2021-12-15</releaseDate>
+  <version>1.5</version>
   <develStage>stable</develStage>
   <compatibility>
-    <ver>4.7</ver>
+    <ver>5.24</ver>
   </compatibility>
   <comments>TinyMCE version 4.7.1</comments>
   <civix>
