@@ -1,4 +1,4 @@
-(function($, _) {
+(function($) {
   var autoId = 0,
   // Default settings (can be overridden in CRM.config.tinymce)
   defaults = {
@@ -153,4 +153,4 @@
     }
   };
 
-})(CRM.$, CRM._);
+})(CRM.$);
